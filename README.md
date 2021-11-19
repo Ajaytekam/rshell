@@ -5,20 +5,22 @@ Generate php code for reverse shell backdoor. The generated code is based on [Pe
 ## Usage : 
 
 ```shell  
-./rshell.py -h
-
-usage: rshell.py [-h] [-s FILE] IP_ADDRESS PORT
-
-positional arguments:
-  IP_ADDRESS            IP Address of Local Listener
-  PORT                  Port number of Local Listener
+$ ./rshell.py -h
+usage: rshell.py [-h] -ip IP -p PORT [-o OUTPUT]
 
 optional arguments:
   -h, --help            show this help message and exit
-  -s FILE, --file FILE  Save the generated payload into a file
+  -ip IP                IP Address of Local Listener
+  -p PORT, --port PORT  Port number of Local Listener
+  -o OUTPUT, --output OUTPUT
+                        Save the generated payload into a file
 ```  
 
-![](demo.gif)  
+Example :  
+
+```
+./rshell.py -ip 192.168.1.10 -p 8080 -o backdoor.php
+```
 
 ### Notes 
 
